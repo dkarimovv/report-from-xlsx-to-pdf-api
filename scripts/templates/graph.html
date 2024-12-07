@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отчет по клиентам для {{ company_name }}</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: 40px;
+            /* text-align: center;  */
+        }
+        h1 {
+            color: #2f5597;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #1f3864;
+            font-size: 22px;
+            margin-top: 30px;
+        }
+        table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            table-layout: fixed;
+        }
+        table, th, td {
+            border: 1px solid #d9d9d9;
+        }
+        th {
+            font-family: 'Golos Text SemiBold', sans-serif;
+            color: #1e04c1;
+            font-size: 10px;
+            background-color: #dbe5f1;
+            padding: 10px;
+        }
+        td {
+            padding: 10px;
+            font-size: 14px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #666;
+        }
+        .phone-column {
+            width: 150px;
+        }
+        .intermediary-list {
+            margin-left: 20px;
+        }
+        .intermediary-list li {
+            margin-bottom: 10px;
+        }
+        /* Стиль для графика */
+        #pie-chart {
+            width: 60%; /* Уменьшение ширины графика */
+            max-width: 600px; /* Ограничиваем максимальную ширину */
+            height: 400px; /* Фиксированная высота */
+            margin: 0 auto; /* Центрируем график */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- <h1>Клиенты для вашего бизнеса - {{ company_name }}</h1>
+
+        <h2>Список транзакций:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Контрагент</th>
+                    <th>ИНН</th>
+                    <th>Сумма покупки</th>
+                    <th class="phone-column">Контакты ЛПР</th>
+                    <th>Назначение платежа</th>
+                    <th>Конкурент</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ transaction.company_name }}</td>
+                    <td>{{ transaction.company_inn }}</td>
+                    <td>{{ transaction.debit }}</td>
+                    <td></td>
+                    <td>{{ transaction.payment_description }}</td>
+                    <td>{{ company_name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table> -->
+
+        <!-- <h2>Компании-посредники:</h2>
+        <ul class="intermediary-list">
+            {% for intermediary in intermediary_companies %}
+            <li>{{ intermediary }}</li>
+            {% endfor %}
+        </ul> -->
+
+        <h2>График распределения платежей:</h2>
+        <div id="pie-chart"></div>
+    </div>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        var graphData = {{ graph_data | tojson | safe }};
+        var layout = graphData.layout || {};
+        
+        // Устанавливаем компактные отступы для графика
+        layout.margin = { t: 60, b: 20, l: 20, r: 20 };  // Увеличиваем верхний отступ для заголовка
+        layout.height = 400;
+        layout.width = 600;
+        
+        Plotly.newPlot('pie-chart', graphData.data, layout);
+    </script>
+</body>
+</html>

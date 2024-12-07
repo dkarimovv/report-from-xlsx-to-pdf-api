@@ -1,0 +1,15 @@
+python-telegram-bot
+pandas
+requests
+jinja2
+plotly
+configparser
+python-telegram-bot[job-queue]
+PyPDF2
+openpyxl
+playwright
+uvicorn
+fastapi
+python-multipart
+pywin32
+pyjwt
